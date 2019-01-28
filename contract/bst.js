@@ -92,5 +92,22 @@ module.exports = {
             spender: spender,
             amount: amount
         });
+    },
+
+    testMint: async function(amount){
+        var bal = await app.model.Wallet.findOne({
+            condition: {
+                owner: this.trs.senderId
+            }
+        });
+        if(!bal) {
+            app.sdb.create('wallet', {
+                owner: this.trs.senderId,
+                amount: amount
+            })
+        }
+        else{
+            app.sdb.update('wallet', {amount: Number(bal) + amount}, {owner: this.trs.senderId});
+        }
     }
 }
