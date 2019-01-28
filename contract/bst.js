@@ -19,7 +19,7 @@ module.exports = {
         app.sdb.update('wallet', {amount: Number(fromBal.amount) - amount}, {owner: this.trs.senderId});
         app.sdb.update('wallet', {amount: Number(toBal.amount) + amount}, {owner: to});
 
-        this.TransferEvent(this.trs.senderId, to, amount);
+        module.exports.TransferEvent(this.trs.senderId, to, amount);
 
     },
 
@@ -52,7 +52,7 @@ module.exports = {
         app.sdb.update('wallet', {amount: Number(toBal.amount) + amount}, {owner: to});
         app.sdb.update('approve', {amount: Number(approved.amount) - amount}, {owner: from, spender: this.trs.senderId});
 
-        this.TransferEvent(from, to, amount);
+        module.exports.TransferEvent(from, to, amount);
     },
 
     approve: async function(spender, amount){
@@ -75,7 +75,7 @@ module.exports = {
                 amount: amount
             });
         
-        this.ApprovalEvent(this.trs.senderId, spender, amount);
+            module.exports.ApprovalEvent(this.trs.senderId, spender, amount);
     },
 
     TransferEvent: function(from, to, amount){
@@ -107,7 +107,7 @@ module.exports = {
             })
         }
         else{
-            app.sdb.update('wallet', {amount: Number(bal) + amount}, {owner: this.trs.senderId});
+            app.sdb.update('wallet', {amount: Number(bal.amount) + amount}, {owner: this.trs.senderId});
         }
     }
 }
