@@ -4,6 +4,7 @@ module.exports = async function () {
   app.registerContract(1000, 'bst.transfer')
   app.registerContract(1001, 'bst.transferFrom')
   app.registerContract(1002, 'bst.approve')
+  app.registerContract(1003, 'best.testMint')
   
 
 
